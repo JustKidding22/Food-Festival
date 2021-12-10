@@ -5,16 +5,24 @@ const BundleAnalyzerPlugin =
 // const WebpackPwaManifest = require("webpack-pwa-manifest");
 const path = require("path");
 
-const config = {
+module.exports = {
   entry: {
     app: "./assets/js/script.js",
     events: "./assets/js/events.js",
     schedule: "./assets/js/schedule.js",
     tickets: "./assets/js/tickets.js",
   },
+  devServer: {
+    static: {
+      directory: path.join(__dirname, "./"),
+    },
+    compress: true,
+    port: 8080,
+  },
+
   output: {
+    path: path.resolve(__dirname, "dist"),
     filename: "[name].bundle.js",
-    path: __dirname + "/dist",
   },
   module: {
     rules: [
@@ -65,5 +73,3 @@ const config = {
   ],
   mode: "development",
 };
-
-module.exports = config;
